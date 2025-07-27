@@ -3,6 +3,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from sqlalchemy.engine import Engine
+from sqlalchemy import event
 
 app = Flask(__name__)
 
@@ -21,3 +23,9 @@ login_manager.login_view = 'login'
 def localize_callback(*args, **kwargs):
     return 'このページにアクセスするには、ログインが必要です。'
 login_manager.localize_callback = localize_callback
+
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()

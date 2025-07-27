@@ -3,7 +3,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from company_blog import db
 from company_blog.models import User
 from company_blog.users.forms import RegistrationForm, LoginForm, UpdateUserForm
-from flask Blueprint
+from flask import Blueprint
 
 users = Blueprint('users',__name__)
 
