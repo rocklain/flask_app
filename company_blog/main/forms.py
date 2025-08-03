@@ -1,11 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, ValidationError
-from wtforms.validators import DateRequired
+from wtforms.validators import DataRequired
 from company_blog.models import BlogCategory
 
 
 class BlogCategoryForm(FlaskForm):
-    category = StringField('カテゴリ名', validators=[DateRequired()])
+    category = StringField('カテゴリ名', validators=[DataRequired()])
     submit = SubmitField('保存')
 
     def validate_category(self, field):

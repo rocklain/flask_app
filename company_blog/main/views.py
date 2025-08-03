@@ -11,8 +11,8 @@ main = Blueprint('main', __name__)
 @login_required
 def category_maintenance():
     page = request.args.get('page', 1, type=int)
-    blog_categories = BlogCategory.query.order_by(BlogCategory.id.asc()).
-    paginate(page=page, per_page=10)
+    blog_categories = BlogCategory.query.order_by(
+        BlogCategory.id.asc()).paginate(page=page, per_page=10)
     form = BlogCategoryForm()
     if form.validate_on_submit():
         blog_category = BlogCategory(category=form.category.data)
